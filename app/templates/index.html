@@ -8,6 +8,9 @@
     <title>Title</title>
 </head>
 <body>
-
+<h1 align = "center"> OlimpiColombia 2016 II </h1>
+    {% for deporte in lista_deportes %}
+        <img src = "{{ deporte.urlImagen }}" width ="500" heigth = "300">
+    {% endfor %}
 </body>
 </html>

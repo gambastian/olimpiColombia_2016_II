@@ -28,6 +28,7 @@ class Destacado(models.Model):
 
 class Deporte(models.Model):
     nombre = models.CharField(max_length=100,null=False)
+    urlImagen = models.CharField(max_length=1000,null=True)
 
 class Deporte_Deportista(models.Model):
     deportista = models.ForeignKey(Deportista, null=False)
