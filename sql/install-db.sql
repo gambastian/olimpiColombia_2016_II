@@ -3,8 +3,7 @@
 -- DROP DATABASE olimpco;
 
 CREATE DATABASE olimpco
-  WITH TEMPLATE = template0
-       OWNER = postgres
+  WITH OWNER = postgres
        ENCODING = 'UTF8'
        TABLESPACE = pg_default
        LC_COLLATE = 'Spanish_Colombia.1252'
