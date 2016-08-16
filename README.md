@@ -6,3 +6,8 @@ Git repository for OlimpiColombia Project
 * Install database
 
 > psql -U postgres -W -f install-db.sql
+
+* Install pip packages
+
+> python -m pip install django
+> python -m pip install psycopg2
