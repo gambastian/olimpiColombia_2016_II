@@ -10,4 +10,5 @@ Git repository for OlimpiColombia Project
 * Install pip packages
 
 > python -m pip install django
+
 > python -m pip install psycopg2
