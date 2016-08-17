@@ -1,1 +1,1 @@
-web: python manage.py runserver
+web: gunicorn olimpicolombia.wsgi:application --log-file -
