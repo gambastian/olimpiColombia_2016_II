@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    'app',
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [
@@ -76,12 +77,20 @@ WSGI_APPLICATION = 'olimpicolombia.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'dfd904uaa4keo8',
+    #     'USER': 'ghzkmahjdkbnqt',
+    #     'PASSWORD': 'zZRw09OSJ3d37hDK1FGXKOStUa',
+    #     'HOST': 'ec2-54-243-203-87.compute-1.amazonaws.com',
+    #     'PORT': '5432',
+    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dfd904uaa4keo8',
-        'USER': 'ghzkmahjdkbnqt',
-        'PASSWORD': 'zZRw09OSJ3d37hDK1FGXKOStUa',
-        'HOST': 'ec2-54-243-203-87.compute-1.amazonaws.com',
+        'NAME': 'olimpco',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
