@@ -1,5 +1,6 @@
-from app.models import Deporte, Deportista, Deporte_Deportista
+from app.models import Deporte, Deporte_Deportista, Destacado
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -22,3 +23,4 @@ def deportista(request):
     context = {'lista_Deporte_Deportista': lista_Deporte_Deportista}
     #context = {'lista_deportista': lista_deportista}
     return render(request, 'app/deportista.html', context)
+
