@@ -1,6 +1,6 @@
 from app.models import Deporte, Deporte_Deportista, Destacado
 from django.shortcuts import render
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404
 
 # Create your views here.
 
@@ -17,9 +17,9 @@ def destacado_detail(request, deportista_id):
     return render(request, 'app/destacado.html', context)
 
 #Funcion para obtener los deportistas
-def deportista(request):
+def deportista(request, deporte_id):
    # lista_deportista = Deportista.objects.all()
-    lista_Deporte_Deportista = Deporte_Deportista.objects.all()
+    lista_Deporte_Deportista = get_list_or_404(Deporte_Deportista.objects.filter(deporte_id=deporte_id))
     context = {'lista_Deporte_Deportista': lista_Deporte_Deportista}
     #context = {'lista_deportista': lista_deportista}
     return render(request, 'app/deportista.html', context)
