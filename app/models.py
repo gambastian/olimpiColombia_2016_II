@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
-
+from django.core.validators import RegexValidator
+from django.core.validators import EmailValidator
 from django.db import models
 
 # Create your models here.
@@ -7,9 +8,23 @@ from django.db import models
 class Usuario(models.Model):
     username = models.CharField(max_length=50,null=False)
     password = models.CharField(max_length=8,null=False)
-    nombre = models.CharField(max_length=50,null=False)
-    apellido = models.CharField(max_length=50,null=False)
-    email = models.EmailField(max_length=50,null=False)
+    nombre = models.CharField(max_length=50,null=False,  validators=[
+        RegexValidator(
+            regex='^[a-zA-Z]*$',
+            message='El nombre de usuario debe ser Alfabetico',
+            code='invalid_nombre'
+        ),
+    ])
+    apellido = models.CharField(max_length=50,null=False, validators=[
+        RegexValidator(
+            regex='^[a-zA-Z]*$',
+            message='El nombre de usuario debe ser Alfabetico',
+            code='invalid_nombre'
+        ),
+    ])
+    email = models.EmailField(max_length=50,null=False, validators=[
+        EmailValidator(message='El email no es valido', code = 'invalid_email')
+        ])
     
 
 class Deportista(models.Model):

@@ -1,6 +1,9 @@
-from app.models import Deporte, Deporte_Deportista, Destacado,Evento
+from .models import Deporte, Deporte_Deportista, Destacado,Evento,Usuario
+from .forms import UsuarioRegistroForm
 from django.shortcuts import render
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 
 # Create your views here.
 
@@ -30,4 +33,23 @@ def evento(request, deportista_id):
     lista_Evento_Deportista = get_list_or_404(Evento.objects.filter(deportista_id=deportista_id))
     context = {'lista_Evento_Deportista': lista_Evento_Deportista}
     return render(request, 'app/evento.html', context)
+
+
+#Funcion para crear form de registro de usuario
+def post_usuario(request):
+    if request.method == 'POST':
+        form = UsuarioRegistroForm(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            nombre = cleaned_data.get('nombre')
+            apellido = cleaned_data.get('nombre')
+            email =  cleaned_data.get('email')
+            username = cleaned_data.get('username')
+            password = cleaned_data.get('password')
+
+            usuario = Usuario.objects.create(nombre = nombre,apellido = apellido, email = email, username = username, password = password)
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        form = UsuarioRegistroForm()
+    return render(request, 'app/crearUsuario.html', {'form': form})
 
