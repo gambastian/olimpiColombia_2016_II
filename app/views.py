@@ -1,6 +1,9 @@
 from app.models import Deporte, Deporte_Deportista, Destacado
-from django.shortcuts import render
-from django.shortcuts import get_list_or_404, get_object_or_404
+from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.views.generic import View
+from app.forms import UserForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -24,3 +27,31 @@ def deportista(request, deporte_id):
     #context = {'lista_deportista': lista_deportista}
     return render(request, 'app/deportista.html', context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('/app')
+
+class UserFormView(View):
+    form_class = UserForm
+    template_name = 'app/registration_form.html'
+
+    #Form en blanco, el usuaio trato de logearse pero no tenia cuenta
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        username = request.POST['username']
+
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+         #   print("6")
+          #  if user.is_active:
+                login(request, user)
+                return redirect('/app')
+
+        return render(request, self.template_name, {'form': form})
