@@ -1,5 +1,10 @@
 from __future__ import unicode_literals
+<<<<<<< HEAD
 
+=======
+from django.core.validators import RegexValidator
+from django.core.validators import EmailValidator
+>>>>>>> refs/remotes/origin/master
 from django.db import models
 
 # Create your models here.
@@ -7,9 +12,29 @@ from django.db import models
 class Usuario(models.Model):
     username = models.CharField(max_length=50,null=False)
     password = models.CharField(max_length=8,null=False)
+<<<<<<< HEAD
     nombre = models.CharField(max_length=50,null=False)
     apellido = models.CharField(max_length=50,null=False)
     email = models.EmailField(max_length=50,null=False)
+=======
+    nombre = models.CharField(max_length=50,null=False,  validators=[
+        RegexValidator(
+            regex='^[a-zA-Z]*$',
+            message='El nombre de usuario debe ser Alfabetico',
+            code='invalid_nombre'
+        ),
+    ])
+    apellido = models.CharField(max_length=50,null=False, validators=[
+        RegexValidator(
+            regex='^[a-zA-Z]*$',
+            message='El nombre de usuario debe ser Alfabetico',
+            code='invalid_nombre'
+        ),
+    ])
+    email = models.EmailField(max_length=50,null=False, validators=[
+        EmailValidator(message='El email no es valido', code = 'invalid_email')
+        ])
+>>>>>>> refs/remotes/origin/master
     
 
 class Deportista(models.Model):
@@ -35,7 +60,11 @@ class Deporte_Deportista(models.Model):
     deporte = models.ForeignKey(Deporte, null=False)
 
 class Evento(models.Model):
+<<<<<<< HEAD
     fecha = models.DateTimeField
+=======
+    fecha = models.DateTimeField()
+>>>>>>> refs/remotes/origin/master
     modalidad = models.ForeignKey(Deporte, null=False)
     deportista = models.ForeignKey(Deportista, null=False)
     resultado = models.CharField(max_length=100,null=False)
