@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'bootstrap3'
+    'bootstrap3',
+    'social.apps.django_app.default',
+    # 'django.contrib.auth.backends.ModelBackend'
 ]
 
 MIDDLEWARE = [
@@ -65,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -135,3 +139,15 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+AUTHENTICATION_BACKENDS = (
+# Facebook
+'social.backends.facebook.FacebookOAuth2',
+# Django
+'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FB_KEY', '')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FB_SECRET', '')
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/app/deportes/'
+LOGIN_REDIRECT_URL = '/app/deportes/'
