@@ -11,10 +11,6 @@ Git repository for OlimpiColombia Project
 
 > python -m pip install django
 
-<<<<<<< HEAD
-> python -m pip install psycopg2
-=======
 > python -m pip install psycopg2
 
 > python -m pip install django-bootstrap3
->>>>>>> refs/remotes/origin/master

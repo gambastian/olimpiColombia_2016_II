@@ -1,30 +1,18 @@
-<<<<<<< HEAD
-from app.models import Deporte, Deporte_Deportista, Destacado
-from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.views.generic import View
-from app.forms import UserForm
-from django.contrib import messages
-=======
+from django.views import View
+
 from .models import Deporte, Deporte_Deportista, Destacado,Evento,Usuario
-from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
 from .forms import UsuarioRegistroForm
 from django.shortcuts import render
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
->>>>>>> refs/remotes/origin/master
+# from app.forms import UserForm
 
 # Create your views here.
 
 #Funcion para obtener los deportes para desplegar en el index
 def index(request):
-<<<<<<< HEAD
-    lista_deporte = Deporte.objects.all()
-    context = {'lista_deporte': lista_deporte}
-    return render(request, 'app/index.html', context)
-=======
     context = {}
     return render(request, 'app/index.html', context)
 
@@ -33,7 +21,6 @@ def lista_deportes(request):
     lista_deporte = Deporte.objects.all()
     context = {'lista_deporte': lista_deporte}
     return render(request, 'app/deportes.html', context)
->>>>>>> refs/remotes/origin/master
 
 #Funcion para obtener el url de un video para un deportista en especifico
 def destacado_detail(request, deportista_id):
@@ -48,39 +35,6 @@ def deportista(request, deporte_id):
     context = {'lista_Deporte_Deportista': lista_Deporte_Deportista}
     #context = {'lista_deportista': lista_deportista}
     return render(request, 'app/deportista.html', context)
-<<<<<<< HEAD
-
-def logout_view(request):
-    logout(request)
-    return redirect('/app')
-
-class UserFormView(View):
-    form_class = UserForm
-    template_name = 'app/registration_form.html'
-
-    #Form en blanco, el usuaio trato de logearse pero no tenia cuenta
-    def get(self, request):
-        form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
-
-    def post(self, request):
-        form = self.form_class(request.POST)
-
-        username = request.POST['username']
-
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-
-        if user is not None:
-         #   print("6")
-          #  if user.is_active:
-                login(request, user)
-                return redirect('/app')
-
-        return render(request, self.template_name, {'form': form})
-=======
-#Funcion para obtener los eventos
-
 
 def evento(request, deportista_id):
     lista_Evento_Deportista = get_list_or_404(Evento.objects.filter(deportista_id=deportista_id))
@@ -109,4 +63,31 @@ def post_usuario(request):
         form = UsuarioRegistroForm()
     return render(request, 'app/crearUsuario.html', {'form': form})
 
->>>>>>> refs/remotes/origin/master
+
+# class UserFormView(View):
+#     form_class = UserForm
+#     template_name = 'app/registration_form.html'
+#
+#     #Form en blanco, el usuaio trato de logearse pero no tenia cuenta
+#     def get(self, request):
+#         form = self.form_class(None)
+#         return render(request, self.template_name, {'form': form})
+#
+#     def post(self, request):
+#         form = self.form_class(request.POST)
+#
+#         username = request.POST['username']
+#
+#         password = request.POST['password']
+#         user = authenticate(username=username, password=password)
+#
+#         if user is not None:
+#          #   print("6")
+#           #  if user.is_active:
+#                 login(request, user)
+#                 return redirect('/app')
+#
+#         return render(request, self.template_name, {'form': form})
+
+
+

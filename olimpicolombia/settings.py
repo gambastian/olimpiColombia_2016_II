@@ -39,13 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-<<<<<<< HEAD
-    'bootstrap3'
-=======
     'bootstrap3',
     'social.apps.django_app.default',
     # 'django.contrib.auth.backends.ModelBackend'
->>>>>>> refs/remotes/origin/master
 ]
 
 MIDDLEWARE = [
@@ -71,11 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-<<<<<<< HEAD
-=======
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
->>>>>>> refs/remotes/origin/master
             ],
         },
     },
@@ -88,23 +81,6 @@ WSGI_APPLICATION = 'olimpicolombia.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
-<<<<<<< HEAD
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'dfd904uaa4keo8',
-    #     'USER': 'ghzkmahjdkbnqt',
-    #     'PASSWORD': 'zZRw09OSJ3d37hDK1FGXKOStUa',
-    #     'HOST': 'ec2-54-243-203-87.compute-1.amazonaws.com',
-    #     'PORT': '5432',
-    # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'olimpco',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
-=======
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'olimpco'),
@@ -112,7 +88,6 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASSWORD', 'postgres'),
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
->>>>>>> refs/remotes/origin/master
     }
 }
 
@@ -163,9 +138,6 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-<<<<<<< HEAD
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-=======
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 AUTHENTICATION_BACKENDS = (
@@ -179,4 +151,3 @@ SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FB_KEY', '')
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FB_SECRET', '')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/app/deportes/'
 LOGIN_REDIRECT_URL = '/app/deportes/'
->>>>>>> refs/remotes/origin/master

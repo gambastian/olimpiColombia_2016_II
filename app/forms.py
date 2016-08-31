@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-from django.contrib.auth.models import User
-from django import forms
-
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
-=======
 from django import forms
 from django.core.validators import validate_email
 
@@ -43,6 +32,3 @@ class UsuarioRegistroForm(forms.ModelForm):
         if password != password2:
             raise forms.ValidationError('las claves no coinciden')
         return password2
-
-
->>>>>>> refs/remotes/origin/master
