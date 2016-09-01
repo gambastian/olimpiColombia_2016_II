@@ -9,5 +9,6 @@ urlpatterns=[
     url(r'^deportista/(?P<deporte_id>\d+)/$', views.deportista, name='deportista'),
     url(r'^evento/(?P<deportista_id>\d+)/$', views.evento, name='evento'),
     url(r'^logout/$', views.logout_view, name="logout"),
-    url(r'^crear_usuario$', views.post_usuario, name='post_usuario')
+    url(r'^crear_usuario$', views.post_usuario, name='post_usuario'),
+    url(r'^login/', views.login_view, name="login"),
 ]

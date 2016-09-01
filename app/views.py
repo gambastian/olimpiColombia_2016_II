@@ -3,7 +3,7 @@ from django.views import View
 from .models import Deporte, Deporte_Deportista, Destacado,Evento,Usuario
 from django.contrib.auth import authenticate, login, logout
 from .forms import UsuarioRegistroForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -63,6 +63,20 @@ def post_usuario(request):
         form = UsuarioRegistroForm()
     return render(request, 'app/crearUsuario.html', {'form': form})
 
+def login_view(request):
+    if request.user.is_authenticated():
+        return redirect(reverse('index'))
+    mensaje=''
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(reverse('index'))
+        else:
+            mensaje="Nombre de usuario o clave no valido"
+    return render(request, 'app/registration_form.html', {'mensaje':mensaje})
 
 # class UserFormView(View):
 #     form_class = UserForm
