@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Deportistas</a>
+                        <a href="#">Evento</a>
                     </li>
                     <li>
                         <a href="{% url 'logout' %}">Logout</a>
@@ -55,32 +55,25 @@
         <div class="row">
             <div class="col-lg-12">
                 <br>
-                <h1 class="page-header">Deportistas
-                    <small>Participantes colombianos en los juegos olimpicos</small>
+                <h1 class="page-header">Eventos del deportista
+                    <small>{{lista_Evento_Deportista.0.deportista.nombre}} {{lista_Evento_Deportista.0.deportista.apellido}}</small>
                 </h1>
             </div>
         </div>
-
-        {% for info in lista_Deporte_Deportista %}
         <div class="row">
-            <div class="col-md-4"><img class="img-responsive" src="{{ info.deporte.urlImagen }}" alt="" style="width: 600px;height: 300px"></div>
-            <div class="col-md-5">
-                <h2><b>Nombre:</b> {{ info.deportista.nombre }} {{ info.deportista.apellido }}</h2>
-                <h3><b>Lugar de Nacimiento:</b> {{ info.deportista.lugar_nacimiento }}</h3>
-                <h3><b>Fechas de Nacimiento:</b> {{ info.deportista.fecha_nacimiento }}</h3>
-                <h3><b>Edad:</b> {{ info.deportista.edad }} años</h3>
-                <h3><b>Peso:</b> {{ info.deportista.peso }} Kg</h3>
-                <h3><b>Estatura:</b> {{ info.deportista.estatura }} metros</h3>
-                <h3><b>Nombre del Entrenador:</b> {{ info.deportista.nombre_entrenador }}</h3>
-            </div>
-             <div class="col-md-2">
-                <a class="btn btn-primary" href="/destacado/{{ info.id }}">Ver Thumbnail <span class="glyphicon glyphicon-chevron-right"></span></a>
-            </div>
-            <br>
-            <div class="col-md-2">
-                <a class="btn btn-primary" href="/evento/{{ info.id }}">Ver Calendario <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <div class="col-md-5 col-md-offset-4">
+               <img class="img-responsive" src="{{lista_Evento_Deportista.0.modalidad.urlImagen}}" alt="" style="width: 600px;height: 300px">
             </div>
         </div>
+
+        {% for info in lista_Evento_Deportista %}
+        <div class="row">
+            <div class="col-md-12">
+            <h3><b>Fecha:</b> {{ info.fecha }}</h3>
+                <h3><b>Modalidad:</b> {{ info.modalidad.nombre }}</h3>
+                <h3><b>Resultado:</b> {{ info.resultado }}</h3>
+        </div>
+             </div>
         <br>
         <br>
         {% endfor %}
@@ -98,8 +91,8 @@
 
     </body>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../lib/jquery.js"></script>
+    <script src="../lib/bootstrap.min.js"></script>
 
 </body>
 

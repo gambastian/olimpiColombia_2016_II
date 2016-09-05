@@ -1,4 +1,7 @@
+from django.http.response import JsonResponse
+import json
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Deporte, Deporte_Deportista, Destacado,Evento,Usuario
 from django.contrib.auth import authenticate, login, logout
@@ -12,6 +15,7 @@ from django.urls import reverse
 # Create your views here.
 
 #Funcion para obtener los deportes para desplegar en el index
+@csrf_exempt
 def index(request):
     context = {}
     return render(request, 'app/index.html', context)
@@ -20,13 +24,13 @@ def index(request):
 def lista_deportes(request):
     lista_deporte = Deporte.objects.all()
     context = {'lista_deporte': lista_deporte}
-    return render(request, 'app/deportes.html', context)
+    # return render(request, 'app/deportes.html', context)
 
 #Funcion para obtener el url de un video para un deportista en especifico
 def destacado_detail(request, deportista_id):
     destacado_actual = get_object_or_404(Destacado.objects.filter(deportista__id=deportista_id))
     context = {'destacado_actual' : destacado_actual}
-    return render(request, 'app/destacado.html', context)
+    # return render(request, 'app/destacado.html', context)
 
 #Funcion para obtener los deportistas
 def deportista(request, deporte_id):
@@ -34,12 +38,12 @@ def deportista(request, deporte_id):
     lista_Deporte_Deportista = get_list_or_404(Deporte_Deportista.objects.filter(deporte_id=deporte_id))
     context = {'lista_Deporte_Deportista': lista_Deporte_Deportista}
     #context = {'lista_deportista': lista_deportista}
-    return render(request, 'app/deportista.html', context)
+    # return render(request, 'app/deportista.html', context)
 
 def evento(request, deportista_id):
     lista_Evento_Deportista = get_list_or_404(Evento.objects.filter(deportista_id=deportista_id))
     context = {'lista_Evento_Deportista': lista_Evento_Deportista}
-    return render(request, 'app/evento.html', context)
+    # return render(request, 'app/evento.html', context)
 
 def logout_view(request):
     logout(request)
@@ -58,25 +62,24 @@ def post_usuario(request):
             password = cleaned_data.get('password')
 
             usuario = Usuario.objects.create(nombre = nombre,apellido = apellido, email = email, username = username, password = password)
-            return HttpResponseRedirect(reverse('index'))
+            # return HttpResponseRedirect(reverse('index'))
     else:
         form = UsuarioRegistroForm()
-    return render(request, 'app/crearUsuario.html', {'form': form})
+    return render(request, 'app/../static/partials/crearUsuario.html', {'form': form})
 
+@csrf_exempt
 def login_view(request):
-    if request.user.is_authenticated():
-        return redirect(reverse('index'))
-    mensaje=''
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        jsonUser=json.loads(request.body)
+        username = jsonUser['username']
+        password = jsonUser['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect(reverse('index'))
+            mensaje="ok"
         else:
             mensaje="Nombre de usuario o clave no valido"
-    return render(request, 'app/registration_form.html', {'mensaje':mensaje})
+    return JsonResponse({"mensaje":mensaje})
 
 # class UserFormView(View):
 #     form_class = UserForm

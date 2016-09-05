@@ -1,0 +1,23 @@
+<br>
+<br>
+<div class="panel-body">
+    <h3>LogIn</h3>
+    <div class="alert alert-danger" ng-if="error">
+        Credenciales Invalidas
+    </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label" for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" ng-model="form.username">
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" class="form-control" ng-model="form.password">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm10">
+                <button class="btn btn-success" ng-click="submitForm()">login</button>
+            </div>
+        </div>
+    </form>
+</div>
