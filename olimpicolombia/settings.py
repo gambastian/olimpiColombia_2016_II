@@ -26,7 +26,7 @@ SECRET_KEY = 'nj!j&%%r&n*@)t*4pbh)wrymv(v8w%sypt!(wv$cte%tc&hk(r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://olimpicolombia-2016.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
