@@ -147,7 +147,7 @@ AUTHENTICATION_BACKENDS = (
 'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FB_KEY', '1769629926647992')
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FB_SECRET', 'f76b3d45573f02b490b0ad1872c9ea31')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FB_KEY', '')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('FB_SECRET', '')
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/app/deportes/'
 LOGIN_REDIRECT_URL = '/app/deportes/'
