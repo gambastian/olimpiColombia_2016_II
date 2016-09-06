@@ -7,23 +7,22 @@
             </h1>
         </div>
     </div>
-    <div>
-{#        {% for info in lista_deporte %}#}
+    <div data-ng-repeat="deporte in deportes">
             <div class="row">
                 <div class="col-md-7">
                     <a href="#">
-                        <img class="img-responsive" src="{{ info.urlImagen }}" alt=""
+                        <img class="img-responsive" src="{{ deporte.fields.urlImagen }}" alt=""
                              style="width: 600px;height: 300px">
                     </a>
                 </div>
                 <div class="col-md-5">
-                    <h2>{{ info.nombre }}</h2>
-                    <a class="btn btn-primary" href="/deportista/{{ info.id }}">Ver deportistas <span
+                    <h2>{{ deporte.fields.nombre }}</h2>
+{#                    <a class="btn btn-primary" href="/deportista/{{ deporte.fields.id }}">Ver deportistas <span#}
+                    <a class="btn btn-primary" href="">Ver deportistas <span
                             class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
             </div>
             <br>
             <br>
-{#        {% endfor %}#}
     </div>
 </div>

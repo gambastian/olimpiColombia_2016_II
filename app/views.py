@@ -1,15 +1,17 @@
-from django.http.response import JsonResponse
 import json
-from django.views import View
+
+from django.contrib.auth import authenticate, login, logout
+from django.core import serializers
+from django.http import HttpResponseRedirect, HttpResponse
+from django.http.response import JsonResponse
+from django.shortcuts import get_list_or_404, get_object_or_404
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Deporte, Deporte_Deportista, Destacado,Evento,Usuario
-from django.contrib.auth import authenticate, login, logout
 from .forms import UsuarioRegistroForm
-from django.shortcuts import render, redirect
-from django.shortcuts import get_list_or_404, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from .models import Deporte, Deporte_Deportista, Destacado,Evento,Usuario
+
+
 # from app.forms import UserForm
 
 # Create your views here.
@@ -21,10 +23,11 @@ def index(request):
     return render(request, 'app/index.html', context)
 
 #Funcion para obtener los deportes para desplegar en el index
+@csrf_exempt
 def lista_deportes(request):
     lista_deporte = Deporte.objects.all()
     context = {'lista_deporte': lista_deporte}
-    # return render(request, 'app/deportes.html', context)
+    return HttpResponse(serializers.serialize("json", lista_deporte))
 
 #Funcion para obtener el url de un video para un deportista en especifico
 def destacado_detail(request, deportista_id):
@@ -71,8 +74,8 @@ def post_usuario(request):
 def login_view(request):
     if request.method == 'POST':
         jsonUser=json.loads(request.body)
-        username = jsonUser['username']
-        password = jsonUser['password']
+        username = jsonUser['body']['username']
+        password = jsonUser['body']['password']
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)

@@ -57,7 +57,6 @@
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                <h3>{{ user.is_authenticated }}</h3>
                 <p style="color: white">Copyright &copy; Olimpicolombia project 2016-II</p>
             </div>
         </div>
@@ -74,9 +73,13 @@
 <script src="{% static "lib/angular/angular-resource.min.js" %}"></script>
 <script src="{% static "lib/angular/angular-cookies.min.js" %}"></script>
 <script src="{% static "js/app.js" %}"></script>
-<script src="{% static "js/deportesController.js" %}"></script>
+<!-- Controllers -->
 <script src="{% static "js/registrationController.js" %}"></script>
-<script src="{% static "js/services.js" %}"></script>
+<script src="{% static "js/deportesController.js" %}"></script>
+<!-- Services -->
+<script src="{% static "js/registrationService.js" %}"></script>
+<script src="{% static "js/deportesService.js" %}"></script>
+<!-- Other -->
 <script src="{% static "js/csrfToken.js" %}"></script>
 
 </body>
