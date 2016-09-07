@@ -10,6 +10,13 @@
                         return response.data;
                     });
                 return promise;
+            },
+            get: function (deporteId) {
+                var promise = $http.get('/api/deporte/' + deporteId, {})
+                    .then(function (response) {
+                        return response.data[0];
+                    });
+                return promise;
             }
         };
 

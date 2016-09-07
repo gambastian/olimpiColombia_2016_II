@@ -36,6 +36,7 @@ class Deportista(models.Model):
     peso = models.FloatField(null=False)
     estatura = models.FloatField(null=False)
     nombre_entrenador = models.CharField(max_length=80,null=False)
+    urlImagen = models.CharField(max_length=1000, null=True)
 
 class Destacado(models.Model):
     deportista = models.ForeignKey(Deportista, null=False)

@@ -5,7 +5,6 @@
         $scope.error = false;
         $scope.submitForm = function () {
             var res = registrationService.login($scope.form).then(function (data) {
-                console.log('OK: ' + JSON.stringify(data));
                 if(data.mensaje =='ok')
                 {
                     $rootScope.authenticated = true;

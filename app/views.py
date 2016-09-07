@@ -8,6 +8,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from app.models import Deportista
 from .forms import UsuarioRegistroForm
 from .models import Deporte, Deporte_Deportista, Destacado,Evento,Usuario
 
@@ -30,23 +31,27 @@ def lista_deportes(request):
     return HttpResponse(serializers.serialize("json", lista_deporte))
 
 #Funcion para obtener el url de un video para un deportista en especifico
+@csrf_exempt
 def destacado_detail(request, deportista_id):
     destacado_actual = get_object_or_404(Destacado.objects.filter(deportista__id=deportista_id))
     context = {'destacado_actual' : destacado_actual}
-    # return render(request, 'app/destacado.html', context)
+    return HttpResponse(serializers.serialize("json", [destacado_actual]))
 
 #Funcion para obtener los deportistas
+@csrf_exempt
 def deportista(request, deporte_id):
-   # lista_deportista = Deportista.objects.all()
-    lista_Deporte_Deportista = get_list_or_404(Deporte_Deportista.objects.filter(deporte_id=deporte_id))
-    context = {'lista_Deporte_Deportista': lista_Deporte_Deportista}
-    #context = {'lista_deportista': lista_deportista}
-    # return render(request, 'app/deportista.html', context)
+    lista_Deporte_Deportista = Deporte_Deportista.objects.filter(deporte_id=deporte_id)
+    deportistaIds = []
+    for dd in lista_Deporte_Deportista:
+        deportistaIds.append(dd.pk)
+    lista_deportistas = get_list_or_404(Deportista.objects.filter(pk__in=deportistaIds))
+    return HttpResponse(serializers.serialize("json", lista_deportistas))
 
+@csrf_exempt
 def evento(request, deportista_id):
     lista_Evento_Deportista = get_list_or_404(Evento.objects.filter(deportista_id=deportista_id))
     context = {'lista_Evento_Deportista': lista_Evento_Deportista}
-    # return render(request, 'app/evento.html', context)
+    return HttpResponse(serializers.serialize("json", lista_Evento_Deportista))
 
 def logout_view(request):
     logout(request)
@@ -84,30 +89,18 @@ def login_view(request):
             mensaje="Nombre de usuario o clave no valido"
     return JsonResponse({"mensaje":mensaje})
 
-# class UserFormView(View):
-#     form_class = UserForm
-#     template_name = 'app/registration_form.html'
-#
-#     #Form en blanco, el usuaio trato de logearse pero no tenia cuenta
-#     def get(self, request):
-#         form = self.form_class(None)
-#         return render(request, self.template_name, {'form': form})
-#
-#     def post(self, request):
-#         form = self.form_class(request.POST)
-#
-#         username = request.POST['username']
-#
-#         password = request.POST['password']
-#         user = authenticate(username=username, password=password)
-#
-#         if user is not None:
-#          #   print("6")
-#           #  if user.is_active:
-#                 login(request, user)
-#                 return redirect('/app')
-#
-#         return render(request, self.template_name, {'form': form})
+@csrf_exempt
+def lista_deportistas(request):
+    lista_deportistas = Deportista.objects.all()
+    context = {'lista_deportistas': lista_deportistas}
+    return HttpResponse(serializers.serialize("json", lista_deportistas))
 
+@csrf_exempt
+def deportista_by_id(request, deportista_id):
+    deportista = get_object_or_404(Deportista.objects.filter(pk=deportista_id))
+    return HttpResponse(serializers.serialize("json", [deportista]))
 
-
+@csrf_exempt
+def deporte_by_id(request, deporte_id):
+    deporte = get_object_or_404(Deporte.objects.filter(pk=deporte_id))
+    return HttpResponse(serializers.serialize("json", [deporte]))

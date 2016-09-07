@@ -35,18 +35,21 @@
             </button>
             <a class="navbar-brand" href="/">OlimpiColombia</a>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        {% verbatim %}
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"
+             ng-controller="navCrtl">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#/prueba">Deportes</a>
-                </li>
-                <li>
-                    <a href="{% url 'logout' %}">Logout</a>
+                    <a href="#/deportes">Deportes</a>
                 </li>
                 <li>
                     <a href="/crear_usuario">Registro</a>
                 </li>
+                 <li>
+                    <a href=""><i class="fa fa-lock"></i>Logout</a>
+                </li>
             </ul>
+        {% endverbatim %}
         </div>
     </div>
 </nav>
@@ -74,11 +77,18 @@
 <script src="{% static "lib/angular/angular-cookies.min.js" %}"></script>
 <script src="{% static "js/app.js" %}"></script>
 <!-- Controllers -->
+<script src="{% static "js/navController.js" %}"></script>
 <script src="{% static "js/registrationController.js" %}"></script>
 <script src="{% static "js/deportesController.js" %}"></script>
+<script src="{% static "js/deportistaController.js" %}"></script>
+<script src="{% static "js/destacadoController.js" %}"></script>
+<script src="{% static "js/eventoController.js" %}"></script>
 <!-- Services -->
 <script src="{% static "js/registrationService.js" %}"></script>
 <script src="{% static "js/deportesService.js" %}"></script>
+<script src="{% static "js/deportistaService.js" %}"></script>
+<script src="{% static "js/destacadoService.js" %}"></script>
+<script src="{% static "js/eventoService.js" %}"></script>
 <!-- Other -->
 <script src="{% static "js/csrfToken.js" %}"></script>
 
