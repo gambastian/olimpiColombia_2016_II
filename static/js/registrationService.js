@@ -12,7 +12,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded',
                 };
 
-                var promise = $http.post('http://localhost:8000/api/login/',
+                var promise = $http.post('/api/login/',
                     {
                         headers: heads,
                         body: data

@@ -5,7 +5,7 @@
 
         var deportesService = {
             list: function () {
-                var promise = $http.get('http://localhost:8000/api/deportes/', {})
+                var promise = $http.get('/api/deportes/', {})
                     .then(function (response) {
                         return response.data;
                     });
