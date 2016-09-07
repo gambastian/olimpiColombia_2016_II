@@ -9,7 +9,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from app.models import Deportista
-from .forms import UsuarioRegistroForm
 from .models import Deporte, Deporte_Deportista, Destacado, Evento, Usuario
 
 
@@ -57,7 +56,7 @@ def evento(request, deportista_id):
     context = {'lista_Evento_Deportista': lista_Evento_Deportista}
     return HttpResponse(serializers.serialize("json", lista_Evento_Deportista))
 
-
+@csrf_exempt
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
