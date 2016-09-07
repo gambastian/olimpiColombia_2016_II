@@ -8,21 +8,20 @@
         </div>
     </div>
     <div data-ng-repeat="deporte in deportes">
-            <div class="row">
-                <div class="col-md-7">
-                    <a href="#">
-                        <img class="img-responsive" src="{{ deporte.fields.urlImagen }}" alt=""
-                             style="width: 600px;height: 300px">
-                    </a>
-                </div>
-                <div class="col-md-5">
-                    <h2>{{ deporte.fields.nombre }}</h2>
-{#                    <a class="btn btn-primary" href="/deportista/{{ deporte.fields.id }}">Ver deportistas <span#}
-                    <a class="btn btn-primary" href="">Ver deportistas <span
-                            class="glyphicon glyphicon-chevron-right"></span></a>
-                </div>
+        <div class="row">
+            <div class="col-md-7">
+                <a href="#">
+                    <img class="img-responsive" src="{{ deporte.fields.urlImagen }}" alt=""
+                         style="width: 600px;height: 300px">
+                </a>
             </div>
-            <br>
-            <br>
+            <div class="col-md-5">
+                <h2>{{ deporte.fields.nombre }}</h2>
+                <a class="btn btn-primary" ng-click="deportistas(deporte.pk)" >Ver deportistas <span
+                        class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+        <br>
+        <br>
     </div>
 </div>

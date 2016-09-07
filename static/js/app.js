@@ -18,6 +18,15 @@
         }).when('/registro', {
             templateUrl: 'static/partials/registration_form.html',
             controller: 'RegistrationCrtl'
+        }).when('/deportista/:deportistaId', {
+            templateUrl: 'static/partials/deportista.html',
+            controller: 'DeportistaCrtl'
+        }).when('/destacado/:deportistaId', {
+            templateUrl: 'static/partials/destacado.html',
+            controller: 'destacadoCtrl'
+        }).when('/evento/:deportistaId', {
+            templateUrl: 'static/partials/evento.html',
+            controller: 'eventoCrtl'
         }).otherwise({
             redirectTo: '/deportes'
         });
@@ -26,7 +35,6 @@
         $compileProvider.debugInfoEnabled(true);
 
         //Anexa por defecto a todas las llamadas el encabezado
-        // $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 
