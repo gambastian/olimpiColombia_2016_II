@@ -20,14 +20,19 @@
                     return response.data;
                 });
                 return promise;
+            },
+            logout: function () {
+                var promise = $http.get('/api/logout', {}).then(function (response) {
+                    return response.data;
+                });
+                return promise;
+            },
+            islogged: function () {
+                var promise = $http.get('/api/islogged', {}).then(function (response) {
+                    return response.data;
+                });
+                return promise;
             }
-            // ,
-            // logout: function () {
-            //     var promise = $http.post(stampidiaEndpoint + '/rest/logout', {}).then(function (response) {
-            //         return response.data;
-            //     });
-            //     return promise;
-            // }
         };
 
         return loginService;

@@ -43,10 +43,10 @@
                     <a href="#/deportes">Deportes</a>
                 </li>
                 <li>
-                    <a href="/crear_usuario">Registro</a>
+                    <a href="#/crear_usuario">Registro</a>
                 </li>
                  <li>
-                    <a href=""><i class="fa fa-lock"></i>Logout</a>
+                    <a href="" ng-click="logout()"><i class="fa fa-lock"></i>Logout</a>
                 </li>
             </ul>
         {% endverbatim %}
@@ -83,12 +83,14 @@
 <script src="{% static "js/deportistaController.js" %}"></script>
 <script src="{% static "js/destacadoController.js" %}"></script>
 <script src="{% static "js/eventoController.js" %}"></script>
+<script src="{% static "js/crearUsuarioController.js" %}"></script>
 <!-- Services -->
 <script src="{% static "js/registrationService.js" %}"></script>
 <script src="{% static "js/deportesService.js" %}"></script>
 <script src="{% static "js/deportistaService.js" %}"></script>
 <script src="{% static "js/destacadoService.js" %}"></script>
 <script src="{% static "js/eventoService.js" %}"></script>
+<script src="{% static "js/crearUsuarioService.js" %}"></script>
 <!-- Other -->
 <script src="{% static "js/csrfToken.js" %}"></script>
 

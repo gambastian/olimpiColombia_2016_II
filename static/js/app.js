@@ -27,6 +27,9 @@
         }).when('/evento/:deportistaId', {
             templateUrl: 'static/partials/evento.html',
             controller: 'eventoCrtl'
+        }).when('/crear_usuario', {
+            templateUrl: 'static/partials/crearUsuario.html',
+            controller: 'crearUsuarioCrtl'
         }).otherwise({
             redirectTo: '/deportes'
         });

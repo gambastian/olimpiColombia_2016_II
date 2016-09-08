@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.core import serializers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.http.response import JsonResponse
@@ -56,10 +57,11 @@ def evento(request, deportista_id):
     context = {'lista_Evento_Deportista': lista_Evento_Deportista}
     return HttpResponse(serializers.serialize("json", lista_Evento_Deportista))
 
+
 @csrf_exempt
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    return JsonResponse({"mensaje": "ok"})
 
 
 # Funcion para crear form de registro de usuario
@@ -73,14 +75,17 @@ def post_usuario(request):
         username = jsonUser['body']['username']
         password = jsonUser['body']['password']
 
-        usuario = Usuario.objects.create(nombre=nombre, apellido=apellido, email=email, username=username,
-                                         password=password)
-        if usuario is not None:
-            login(request, usuario)
-            mensaje = "ok"
-        else:
-            mensaje = "El usuario no fue creado"
-        return JsonResponse({"mensaje": mensaje})
+        try:
+            usuario = User.objects.create(first_name=nombre, last_name=apellido, email=email, username=username,
+                                          password=password)
+            if usuario is not None:
+                mensaje = "ok"
+            else:
+                mensaje = "El usuario no fue creado"
+            return JsonResponse({"mensaje": mensaje})
+        except ValueError, error:
+            return JsonResponse({"mensaje": "fallo la creacion"})
+
 
 @csrf_exempt
 def login_view(request):
@@ -114,3 +119,12 @@ def deportista_by_id(request, deportista_id):
 def deporte_by_id(request, deporte_id):
     deporte = get_object_or_404(Deporte.objects.filter(pk=deporte_id))
     return HttpResponse(serializers.serialize("json", [deporte]))
+
+
+@csrf_exempt
+def is_logged(request):
+    if request.user.is_authenticated():
+        mensaje = "ok"
+    else:
+        mensaje = "no"
+    return JsonResponse({"mensaje": mensaje})
